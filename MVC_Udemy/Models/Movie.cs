@@ -13,18 +13,25 @@ namespace MVC_Udemy.Models
         [Key]
         public int Id { get; set; }
 
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
+        [Display(Name = "Description")]
         public string Description { get; set; }
 
+        [Display(Name = "Price")]
         public double Price { get; set; }
 
+        [Display(Name = "Image")]
         public string ImageURL { get; set; }
 
+        [Display(Name = "Star Date")]
         public DateTime StartDate { get; set; }
 
+        [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
 
+        [Display(Name = "Movie Category")]
         public MovieCategory MovieCategory { get; set; }
 
         // Relationship
