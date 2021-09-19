@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace _01_MVC.Models
+namespace MVC_Udemy.Models
 {
     public class Actor_Movie
     {

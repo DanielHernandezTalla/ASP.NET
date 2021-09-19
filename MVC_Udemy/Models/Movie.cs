@@ -1,4 +1,4 @@
-﻿using _01_MVC.Data;
+﻿using MVC_Udemy.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace _01_MVC.Models
+namespace MVC_Udemy.Models
 {
     public class Movie
     {
