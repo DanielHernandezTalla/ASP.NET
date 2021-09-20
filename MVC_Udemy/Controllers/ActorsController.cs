@@ -46,7 +46,7 @@ namespace MVC_Udemy.Controllers
         {
             var actorDetails = await _service.GetByIdAsync(id);
 
-            if (actorDetails == null) return View("Empty");
+            if (actorDetails == null) return View("NotFound");
 
             return View(actorDetails);
 
@@ -89,7 +89,7 @@ namespace MVC_Udemy.Controllers
         {
             var actorDelete = await _service.GetByIdAsync(id);
             
-            if (actorDelete == null) return View("NotFouns");
+            if (actorDelete == null) return View("NotFound");
 
             await _service.DeleteAsync(id);
 
