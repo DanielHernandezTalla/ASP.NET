@@ -32,6 +32,7 @@ namespace MVC_Udemy
 
             // Services Configuration
             services.AddScoped<IActorsService, ActorsService>();
+            services.AddScoped<IProducerService, ProdicerService>();
 
             services.AddControllersWithViews();
         }
