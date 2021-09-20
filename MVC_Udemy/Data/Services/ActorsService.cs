@@ -16,23 +16,31 @@ namespace MVC_Udemy.Data.Services
             _context = context;
         }
 
+        // Adding a new actor
         public async Task AddAsync  (Actor actor)
         {
             await _context.AddAsync(actor);
             await _context.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        // Deleting an actor
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var result = await _context.Actors.FirstOrDefaultAsync(n => n.Id == id);
+
+            _context.Actors.Remove(result);
+
+            await _context.SaveChangesAsync();
         }
 
+        // Getting all actors
         public async Task<IEnumerable<Actor>> GetAllAsync()
         {
             var result = await _context.Actors.ToListAsync();
             return result;
         }
 
+        // Getting an actor by id
         public async Task<Actor> GetByIdAsync(int id)
         {
             var result = await _context.Actors.FirstOrDefaultAsync(n => n.Id == id);
@@ -40,9 +48,12 @@ namespace MVC_Udemy.Data.Services
             return result;
         }
 
-        public Actor Update(int id, Actor actor)
+        // Updating an actor by id
+        public async Task<Actor> UpdateAsync(int id, Actor actor)
         {
-            throw new NotImplementedException();
+            _context.Update(actor);
+            await _context.SaveChangesAsync();
+            return actor;
         }
     }
 }

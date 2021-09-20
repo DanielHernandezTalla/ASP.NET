@@ -34,11 +34,10 @@ namespace MVC_Udemy.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([Bind("FullName, ProfilePictureURL, Bio")]Actor actor)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(actor);
-            }
+            if (!ModelState.IsValid) return View(actor);
+
             await _service.AddAsync(actor);
+            
             return RedirectToAction(nameof(Index));
         }
 
@@ -51,6 +50,50 @@ namespace MVC_Udemy.Controllers
 
             return View(actorDetails);
 
+        }
+
+        // Get: Actors/Edit
+        public async Task<IActionResult> Edit(int id)
+        {
+            var actorEdit = await _service.GetByIdAsync(id);
+
+            if (actorEdit == null) return View("NotFound");
+
+            return View(actorEdit);
+        }
+
+        // Post: Actors/Edit/1
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, [Bind("Id, FullName, ProfilePictureURL, Bio")] Actor actor)
+        {
+            if (!ModelState.IsValid) return View(actor);
+            
+            await _service.UpdateAsync(id, actor);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        // Get: Actors/Delete
+        public async Task<IActionResult> Delete (int id)
+        {
+            var actorDelete = await _service.GetByIdAsync(id);
+
+            if (actorDelete == null) return View("NotFound");
+
+            return View(actorDelete);
+        }
+
+        // Post: Actors/Delete/1
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var actorDelete = await _service.GetByIdAsync(id);
+            
+            if (actorDelete == null) return View("NotFouns");
+
+            await _service.DeleteAsync(id);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

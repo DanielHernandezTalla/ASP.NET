@@ -14,8 +14,8 @@ namespace MVC_Udemy.Data.Services
 
         Task AddAsync(Actor actor);
 
-        Actor Update(int id, Actor actor);
+        Task<Actor> UpdateAsync(int id, Actor actor);
 
-        void Delete(int id);
+        Task DeleteAsync(int id);
     }
 }
