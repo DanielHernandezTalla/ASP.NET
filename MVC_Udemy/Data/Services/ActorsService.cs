@@ -16,14 +16,22 @@ namespace MVC_Udemy.Data.Services
             _context = context;
         }
 
-        // Adding a new actor
+        /// <summary>
+        /// Adding a new actor
+        /// </summary>
+        /// <param name="actor"></param>
+        /// <returns></returns>
         public async Task AddAsync  (Actor actor)
         {
             await _context.AddAsync(actor);
             await _context.SaveChangesAsync();
         }
 
-        // Deleting an actor
+        /// <summary>
+        /// Deleting an actor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task DeleteAsync(int id)
         {
             var result = await _context.Actors.FirstOrDefaultAsync(n => n.Id == id);
@@ -33,14 +41,21 @@ namespace MVC_Udemy.Data.Services
             await _context.SaveChangesAsync();
         }
 
-        // Getting all actors
+        /// <summary>
+        /// Getting all actors
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<Actor>> GetAllAsync()
         {
             var result = await _context.Actors.ToListAsync();
             return result;
         }
 
-        // Getting an actor by id
+        /// <summary>
+        /// Getting an actor by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<Actor> GetByIdAsync(int id)
         {
             var result = await _context.Actors.FirstOrDefaultAsync(n => n.Id == id);
@@ -48,7 +63,12 @@ namespace MVC_Udemy.Data.Services
             return result;
         }
 
-        // Updating an actor by id
+        /// <summary>
+        /// Updating an actor by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="actor"></param>
+        /// <returns></returns>
         public async Task<Actor> UpdateAsync(int id, Actor actor)
         {
             _context.Update(actor);
