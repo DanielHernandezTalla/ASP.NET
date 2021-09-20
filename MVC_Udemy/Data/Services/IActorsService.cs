@@ -1,4 +1,5 @@
-﻿using MVC_Udemy.Models;
+﻿using MVC_Udemy.Data.Base;
+using MVC_Udemy.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,16 +7,18 @@ using System.Threading.Tasks;
 
 namespace MVC_Udemy.Data.Services
 {
-    public interface IActorsService
+    public interface IActorsService: IEntityBaseRepository<Actor>
     {
-        Task<IEnumerable<Actor>> GetAllAsync();
+        // This methods was replaced by entityBase 
 
-        Task<Actor> GetByIdAsync(int id);
+        //Task<IEnumerable<Actor>> GetAllAsync();
 
-        Task AddAsync(Actor actor);
+        //Task<Actor> GetByIdAsync(int id);
 
-        Task<Actor> UpdateAsync(int id, Actor actor);
+        //Task AddAsync(Actor actor);
 
-        Task DeleteAsync(int id);
+        //Task<Actor> UpdateAsync(int id, Actor actor);
+
+        //Task DeleteAsync(int id);
     }
 }
