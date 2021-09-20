@@ -12,7 +12,7 @@ namespace MVC_Udemy.Data.Services
 
         Actor GetById(int id);
 
-        void add(Actor actor);
+        void Add(Actor actor);
 
         Actor Update(int id, Actor actor);
 

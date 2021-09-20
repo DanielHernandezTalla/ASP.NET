@@ -16,9 +16,10 @@ namespace MVC_Udemy.Data.Services
             _context = context;
         }
 
-        public void add(Actor actor)
+        public void Add(Actor actor)
         {
-            throw new NotImplementedException();
+            _context.Add(actor);
+            _context.SaveChanges();
         }
 
         public void Delete(int id)

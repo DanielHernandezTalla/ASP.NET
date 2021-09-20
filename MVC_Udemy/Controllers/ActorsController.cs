@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC_Udemy.Data;
 using MVC_Udemy.Data.Services;
+using MVC_Udemy.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,24 @@ namespace MVC_Udemy.Controllers
         {
             var data = await _service.GetAll();
             return View(data);
+        }
+
+        // Get: Actors/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // Post: Actors/Create
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("FullName, ProfilePictureURL, Bio")]Actor actor)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(actor);
+            }
+            _service.Add(actor);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
