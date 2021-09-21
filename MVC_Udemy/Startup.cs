@@ -34,6 +34,7 @@ namespace MVC_Udemy
             services.AddScoped<IActorsService, ActorsService>();
             services.AddScoped<IProducerService, ProdicerService>();
             services.AddScoped<ICinemasService, CinemasService>();
+            services.AddScoped<IMoviesService, MoviesService>();
 
             services.AddControllersWithViews();
         }

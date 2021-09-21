@@ -1,4 +1,5 @@
 ﻿using MVC_Udemy.Data;
+using MVC_Udemy.Data.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MVC_Udemy.Models
 {
-    public class Movie
+    public class Movie: IEntityBase
     {
         [Key]
         public int Id { get; set; }
