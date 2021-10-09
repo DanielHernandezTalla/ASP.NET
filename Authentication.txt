@@ -1,0 +1,18 @@
+Autenticacion? Proceso de determinar la identidad de un usuario 
+Autorizacion? Proceso de determinar si un usuario tiene acceso a un recurso
+
+Encargados de la de la autenticaciones
+IAuthenticationService utilizado por el middleware Authentication
+
+Authentication utiliza Authentication Handler 
+Esquema de autenticacion: 
+	- Un controlador de autenticacion (Authentication Handler)
+	- Opciones para configurar esa instacia especidica del controlador 
+
+-Autenticacion (Authenticate): Responsable de contruir la identidad del usuario.
+ 	Devuelve AuthenticationResult
+-Desafio (chanllege) > intenta autenticar Http401: Invocado durante el proceso
+	Autorizacion. Debe permitir que el usuario sepa cual es el mecanismo 
+	de autenticacion que debe ser utilizado
+-Prohibicion (Forbid) > Http403: Invocado en el proceso de Autrorizacion cuando 
+	el usuario autenticado intenta acceder a un recurso y no tiene autorizacion.

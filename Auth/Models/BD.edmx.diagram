@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="872b268bb66d4db7a579fc8a90b78c97" Name="Diagram1">
+        <EntityTypeShape EntityType="MVC_UdemyModel.tblModulo" Width="1.5" PointX="2.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC_UdemyModel.tblOperacione" Width="1.5" PointX="5.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC_UdemyModel.tblRol" Width="1.5" PointX="5.875" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC_UdemyModel.tblRolOperacion" Width="1.5" PointX="8.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MVC_UdemyModel.tblUsuario" Width="1.5" PointX="2.875" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="MVC_UdemyModel.FK_tblOperaciones_tblModulo" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC_UdemyModel.FK_tblRolOperacion_tblOperaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC_UdemyModel.FK_tblRolOperacion_tblRol" ManuallyRouted="false" />
+        <AssociationConnector Association="MVC_UdemyModel.FK_tblUsuario_tblRol" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

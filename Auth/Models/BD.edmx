@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MVC_UdemyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblModulo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblOperaciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idModulo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblRol">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblRolOperacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="idRol" Type="int" Nullable="false" />
+          <Property Name="idOperacion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUsuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="idRol" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tblOperaciones_tblModulo">
+          <End Role="tblModulo" Type="Self.tblModulo" Multiplicity="1" />
+          <End Role="tblOperaciones" Type="Self.tblOperaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblModulo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblOperaciones">
+              <PropertyRef Name="idModulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRolOperacion_tblOperaciones">
+          <End Role="tblOperaciones" Type="Self.tblOperaciones" Multiplicity="1" />
+          <End Role="tblRolOperacion" Type="Self.tblRolOperacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOperaciones">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblRolOperacion">
+              <PropertyRef Name="idOperacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRolOperacion_tblRol">
+          <End Role="tblRol" Type="Self.tblRol" Multiplicity="1" />
+          <End Role="tblRolOperacion" Type="Self.tblRolOperacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRol">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblRolOperacion">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUsuario_tblRol">
+          <End Role="tblRol" Type="Self.tblRol" Multiplicity="1" />
+          <End Role="tblUsuario" Type="Self.tblUsuario" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblRol">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblUsuario">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MVC_UdemyModelStoreContainer">
+          <EntitySet Name="tblModulo" EntityType="Self.tblModulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOperaciones" EntityType="Self.tblOperaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRol" EntityType="Self.tblRol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRolOperacion" EntityType="Self.tblRolOperacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUsuario" EntityType="Self.tblUsuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblOperaciones_tblModulo" Association="Self.FK_tblOperaciones_tblModulo">
+            <End Role="tblModulo" EntitySet="tblModulo" />
+            <End Role="tblOperaciones" EntitySet="tblOperaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblRolOperacion_tblOperaciones" Association="Self.FK_tblRolOperacion_tblOperaciones">
+            <End Role="tblOperaciones" EntitySet="tblOperaciones" />
+            <End Role="tblRolOperacion" EntitySet="tblRolOperacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblRolOperacion_tblRol" Association="Self.FK_tblRolOperacion_tblRol">
+            <End Role="tblRol" EntitySet="tblRol" />
+            <End Role="tblRolOperacion" EntitySet="tblRolOperacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUsuario_tblRol" Association="Self.FK_tblUsuario_tblRol">
+            <End Role="tblRol" EntitySet="tblRol" />
+            <End Role="tblUsuario" EntitySet="tblUsuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MVC_UdemyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblModulo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblOperaciones" Relationship="Self.FK_tblOperaciones_tblModulo" FromRole="tblModulo" ToRole="tblOperaciones" />
+        </EntityType>
+        <EntityType Name="tblOperacione">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idModulo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblModulo" Relationship="Self.FK_tblOperaciones_tblModulo" FromRole="tblOperaciones" ToRole="tblModulo" />
+          <NavigationProperty Name="tblRolOperacions" Relationship="Self.FK_tblRolOperacion_tblOperaciones" FromRole="tblOperaciones" ToRole="tblRolOperacion" />
+        </EntityType>
+        <EntityType Name="tblRol">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblRolOperacions" Relationship="Self.FK_tblRolOperacion_tblRol" FromRole="tblRol" ToRole="tblRolOperacion" />
+          <NavigationProperty Name="tblUsuario" Relationship="Self.FK_tblUsuario_tblRol" FromRole="tblRol" ToRole="tblUsuario" />
+        </EntityType>
+        <EntityType Name="tblRolOperacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="idRol" Type="Int32" Nullable="false" />
+          <Property Name="idOperacion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblOperacione" Relationship="Self.FK_tblRolOperacion_tblOperaciones" FromRole="tblRolOperacion" ToRole="tblOperaciones" />
+          <NavigationProperty Name="tblRol" Relationship="Self.FK_tblRolOperacion_tblRol" FromRole="tblRolOperacion" ToRole="tblRol" />
+        </EntityType>
+        <EntityType Name="tblUsuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idRol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblRol" Relationship="Self.FK_tblUsuario_tblRol" FromRole="tblUsuario" ToRole="tblRol" />
+        </EntityType>
+        <Association Name="FK_tblOperaciones_tblModulo">
+          <End Role="tblModulo" Type="Self.tblModulo" Multiplicity="1" />
+          <End Role="tblOperaciones" Type="Self.tblOperacione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblModulo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblOperaciones">
+              <PropertyRef Name="idModulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRolOperacion_tblOperaciones">
+          <End Role="tblOperaciones" Type="Self.tblOperacione" Multiplicity="1" />
+          <End Role="tblRolOperacion" Type="Self.tblRolOperacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOperaciones">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblRolOperacion">
+              <PropertyRef Name="idOperacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRolOperacion_tblRol">
+          <End Role="tblRol" Type="Self.tblRol" Multiplicity="1" />
+          <End Role="tblRolOperacion" Type="Self.tblRolOperacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRol">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblRolOperacion">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUsuario_tblRol">
+          <End Role="tblRol" Type="Self.tblRol" Multiplicity="1" />
+          <End Role="tblUsuario" Type="Self.tblUsuario" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblRol">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblUsuario">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MVC_UdemyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblModuloes" EntityType="Self.tblModulo" />
+          <EntitySet Name="tblOperaciones" EntityType="Self.tblOperacione" />
+          <EntitySet Name="tblRols" EntityType="Self.tblRol" />
+          <EntitySet Name="tblRolOperacions" EntityType="Self.tblRolOperacion" />
+          <EntitySet Name="tblUsuarios" EntityType="Self.tblUsuario" />
+          <AssociationSet Name="FK_tblOperaciones_tblModulo" Association="Self.FK_tblOperaciones_tblModulo">
+            <End Role="tblModulo" EntitySet="tblModuloes" />
+            <End Role="tblOperaciones" EntitySet="tblOperaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblRolOperacion_tblOperaciones" Association="Self.FK_tblRolOperacion_tblOperaciones">
+            <End Role="tblOperaciones" EntitySet="tblOperaciones" />
+            <End Role="tblRolOperacion" EntitySet="tblRolOperacions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblRolOperacion_tblRol" Association="Self.FK_tblRolOperacion_tblRol">
+            <End Role="tblRol" EntitySet="tblRols" />
+            <End Role="tblRolOperacion" EntitySet="tblRolOperacions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUsuario_tblRol" Association="Self.FK_tblUsuario_tblRol">
+            <End Role="tblRol" EntitySet="tblRols" />
+            <End Role="tblUsuario" EntitySet="tblUsuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MVC_UdemyModelStoreContainer" CdmEntityContainer="MVC_UdemyEntities">
+          <EntitySetMapping Name="tblModuloes">
+            <EntityTypeMapping TypeName="MVC_UdemyModel.tblModulo">
+              <MappingFragment StoreEntitySet="tblModulo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOperaciones">
+            <EntityTypeMapping TypeName="MVC_UdemyModel.tblOperacione">
+              <MappingFragment StoreEntitySet="tblOperaciones">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idModulo" ColumnName="idModulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRols">
+            <EntityTypeMapping TypeName="MVC_UdemyModel.tblRol">
+              <MappingFragment StoreEntitySet="tblRol">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRolOperacions">
+            <EntityTypeMapping TypeName="MVC_UdemyModel.tblRolOperacion">
+              <MappingFragment StoreEntitySet="tblRolOperacion">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="idOperacion" ColumnName="idOperacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsuarios">
+            <EntityTypeMapping TypeName="MVC_UdemyModel.tblUsuario">
+              <MappingFragment StoreEntitySet="tblUsuario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
