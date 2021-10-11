@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC_Udemy.Data;
 using MVC_Udemy.Data.Services;
@@ -32,8 +33,14 @@ namespace MVC_Udemy.Controllers
             return View(movieDetail);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var movieDropdawnData = await _service.GetNewMovieDropdawnsValues();
+
+            ViewBag.Cinemas = new SelectList(movieDropdawnData.cinemas, "Id", "Name");
+            ViewBag.Producers = new SelectList(movieDropdawnData.producers, "Id", "FullName");
+            ViewBag.ActorIds = new SelectList(movieDropdawnData.actors, "Id", "FullName");
+
             return View();
         }
 
