@@ -15,5 +15,7 @@ namespace MVC_Udemy.Data.Services
         Task<NewMovieDropdawnsVM> GetNewMovieDropdawnsValues();
 
         Task AddNewMovieAsync(NewMovieVM data);
+
+        Task UpdateMovieAsync(NewMovieVM data);
     }
 }

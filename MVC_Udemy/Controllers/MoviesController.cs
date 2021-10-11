@@ -65,5 +65,58 @@ namespace MVC_Udemy.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        // Get: Movies/Edit
+        public async Task<IActionResult> Edit(int id)
+        {
+            var movieDetails = await _service.GetMovieByIdAsync(id);
+
+            if (movieDetails == null) return View("NotFound");
+
+            var response = new NewMovieVM()
+            {
+                Id = movieDetails.Id,
+                Name = movieDetails.Name,
+                Description = movieDetails.Description,
+                Price = movieDetails.Price,
+                StartDate = movieDetails.StartDate,
+                EndDate = movieDetails.EndDate,
+                ImageURL = movieDetails.ImageURL,
+                MovieCategory = movieDetails.MovieCategory,
+                CinemaId = movieDetails.CinemaId,
+                ProducerId = movieDetails.ProducerId,
+                ActorsIds = movieDetails.Actor_Movies.Select(n => n.ActorId).ToList()
+            };
+
+            var movieDropdawnData = await _service.GetNewMovieDropdawnsValues();
+
+            ViewBag.Cinemas = new SelectList(movieDropdawnData.cinemas, "Id", "Name");
+            ViewBag.Producers = new SelectList(movieDropdawnData.producers, "Id", "FullName");
+            ViewBag.ActorIds = new SelectList(movieDropdawnData.actors, "Id", "FullName");
+
+            return View(response);
+        }
+
+        // Post: Movies/Edit
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, NewMovieVM movie)
+        {
+            if (id != movie.Id) return View("NotFound");
+
+            if (!ModelState.IsValid)
+            {
+                var movieDropdawnData = await _service.GetNewMovieDropdawnsValues();
+
+                ViewBag.Cinemas = new SelectList(movieDropdawnData.cinemas, "Id", "Name");
+                ViewBag.Producers = new SelectList(movieDropdawnData.producers, "Id", "FullName");
+                ViewBag.ActorIds = new SelectList(movieDropdawnData.actors, "Id", "FullName");
+
+                return View(movie);
+            }
+
+            await _service.UpdateMovieAsync(movie);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
