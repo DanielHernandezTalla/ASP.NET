@@ -44,5 +44,7 @@ namespace MVC_Udemy.Data
         public DbSet<Order> Orders{ get; set; }
 
         public DbSet<OrderItem> OrderItems { get; set; }
+
+        public DbSet<ShoppingCardItem> ShoppingCardItems { get; set; }
     }
 }
