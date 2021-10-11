@@ -32,5 +32,10 @@ namespace MVC_Udemy.Controllers
             return View(movieDetail);
         }
 
+        public IActionResult Create()
+        {
+            return View();
+        }
+
     }
 }
