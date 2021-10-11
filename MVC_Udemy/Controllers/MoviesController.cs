@@ -25,6 +25,19 @@ namespace MVC_Udemy.Controllers
             var movies = await _service.GetAllAsync(n => n.Cinema   );
             return View(movies);
         }
+        public async Task<IActionResult> Filter(string searchString)
+        {
+            var movies = await _service.GetAllAsync(n => n.Cinema);
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                var filterResult = movies.Where(n => n.Name.Contains(searchString) || n.Description.Contains(searchString)).ToList();
+
+                return View("Index", filterResult);
+            }
+
+            return View("Index", movies);
+        }
 
         // Get: Movies/Details
         public async Task<IActionResult> Details(int id)
