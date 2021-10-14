@@ -13,11 +13,22 @@ namespace MVC_Udemy.Controllers
     {
         private readonly IMoviesService _service;
         private readonly ShoppingCart _shoppingCart;
+        private readonly IOrdersService _ordersService;
 
-        public OrdersController(IMoviesService service, ShoppingCart shoppingCart)
+        public OrdersController(IMoviesService service, ShoppingCart shoppingCart, IOrdersService ordersService)
         {
             _service = service;
             _shoppingCart = shoppingCart;
+            _ordersService = ordersService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            string userId = "";
+            
+            var orders = await _ordersService.GetOrdersByUserIdAsync(userId);
+
+            return View(orders);
         }
 
         public IActionResult ShoppingCart()
@@ -52,6 +63,20 @@ namespace MVC_Udemy.Controllers
                 _shoppingCart.RemoveItemCart(item);
 
             return RedirectToAction(nameof(ShoppingCart));
+        }
+
+        public async Task<IActionResult> CompleteOrder()
+        {
+            var items = _shoppingCart.GetShoppingCartItems();
+
+            string userId = "";
+            string userEmailAddres = "";
+
+            await _ordersService.StoreOrderAsync(items, userId, userEmailAddres);
+
+            await _shoppingCart.ClearShoppingCartAsync();
+
+            return View("OrderCompleted");
         }
     }
 }

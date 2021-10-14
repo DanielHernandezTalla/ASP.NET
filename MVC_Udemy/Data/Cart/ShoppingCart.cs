@@ -91,5 +91,14 @@ namespace MVC_Udemy.Data.Cart
             return total;
         }
 
+        public async Task ClearShoppingCartAsync()
+        {
+            var items = await _context.ShoppingCardItems.Where(n => n.ShoppingCardId == ShoppingCartId).ToListAsync();
+
+            _context.ShoppingCardItems.RemoveRange(items);
+
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

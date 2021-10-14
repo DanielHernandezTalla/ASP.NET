@@ -15,10 +15,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <td>Select amount</td>
-                    <td>Movie</td>
-                    <td>Price</td>
-                    <td>Subtotal</td>
+                    <th>Select amount</th>
+                    <th>Movie</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
                     <td></td>
                 </tr>
             </thead>
@@ -53,6 +53,9 @@
         </table>
         <div class="text-center">
             <div class="btn-group">
+                <a class="btn btn-outline-primary" asp-action="CompleteOrder">
+                    Complete order
+                </a>
                 <a class="btn btn-outline-success" asp-controller="Movies" asp-action="Index">
                     Add more items
                 </a>
